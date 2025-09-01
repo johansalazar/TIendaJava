@@ -1,2 +1,2 @@
 # TIendaJava
-prueba pen java de tienda
+prueba java de tienda
