@@ -1,0 +1,20 @@
+# Historia de Usuario
+**Como** administrador de la tienda  
+**Quiero** vender productos, generar pedidos cuando el inventario llega al mínimo y ver estadísticas básicas  
+**Para** tomar decisiones de abastecimiento y mercadeo.
+
+## Criterios de Aceptación
+1. **Vender producto**
+   - Dado que selecciono un producto en la grilla, cuando ingreso una cantidad válida menor o igual al stock, entonces se registra una venta en la BD y el stock disminuye en esa cantidad.
+   - Si la cantidad es inválida (<=0 o mayor al stock), se muestra un mensaje de error y no se registra la venta.
+2. **Generar pedido**
+   - Dado un producto con `stock <= min_stock`, cuando presiono *Pedir Producto*, entonces se registra un pedido por `reorder_qty` en la BD y el stock aumenta en esa cantidad.
+   - Si el producto aún no alcanza el mínimo, el sistema informa que no se requiere pedido.
+3. **Cálculos / Estadísticas**
+   - El sistema muestra en tiempo real: **Ingresos** (suma de todas las ventas), **Producto más vendido** (por cantidad), **Producto menos vendido** (incluye productos sin ventas) y **Promedio** (Ingresos / Unidades vendidas).
+   - Al realizar ventas, los cálculos se actualizan sin reiniciar la aplicación.
+4. **Precios e IVA**
+   - El precio mostrado por producto corresponde a `base_price * (1 + tax_rate)` donde `tax_rate` es 0.16 papelería, 0.04 supermercado, 0.12 droguería.
+   - Los porcentajes de IVA se muestran en la grilla como 16.0%, 4.0% o 12.0% según el tipo.
+5. **Interfaz**
+   - La ventana principal contiene: grilla de productos con columnas *Producto, Cantidad, IVA, Precio, Pedido (SI/NO)*, botones *Vender Producto* y *Pedir Producto*, y un panel *Cálculos* con las cuatro métricas.
